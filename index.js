@@ -8,26 +8,24 @@ express = require('express'),
 app = express(),
 app.get('/', (req, res) => res.statusCode(200)),
 app.listen(process.env.PORT),
-{
-  readFileSync,
-  promises: { writeFile }
-} = require('fs'),
-loginKey = readFileSync('key', 'utf8'),
-{ resolve } = require('path'),
+database = new (require('@replit/database'))(),
 SteamUser = require('steam-user'),
 user = new SteamUser({ dataDirectory: null }),
-user.logOn({
-  accountName: ACCOUNT_NAME,
-  password: PASSWORD,
-  loginKey,
-  rememberPassword: true
-}),
+(async () => (
+  loginKey = await database.get('key'),
+  user.logOn({
+    accountName: ACCOUNT_NAME,
+    password: PASSWORD,
+    loginKey,
+    rememberPassword: true
+  })
+))(),
 user.on('loginKey', (key) =>
-  writeFile('key', key, 'utf8')
+  database.set('key', key)
     .then(() => console.log(`Got key "${key}"`))
 ),
 user.on('loggedOn', () => (
-  user.setPersona(SteamUser.EPersonaState.Online),
+  user.setPersona(SteamUser.EPersonaState.Offline),
   user.gamesPlayed(GAMES_ID.split(',').map((gameID) => +gameID)),
   console.log(user.steamID.toString())
 )),
