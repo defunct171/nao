@@ -6,7 +6,7 @@ require('dotenv/config'),
 } = process.env,
 express = require('express'),
 app = express(),
-app.get('/', (req, res) => res.statusCode(200)),
+app.get('/', (req, res) => res.sendStatus(200)),
 app.listen(process.env.PORT),
 database = new (require('@replit/database'))(),
 SteamUser = require('steam-user'),
@@ -25,7 +25,7 @@ user.on('loginKey', (key) =>
     .then(() => console.log(`Got key "${key}"`))
 ),
 user.on('loggedOn', () => (
-  user.setPersona(SteamUser.EPersonaState.Offline),
+  user.setPersona(SteamUser.EPersonaState.Online),
   user.gamesPlayed(GAMES_ID.split(',').map((gameID) => +gameID)),
   console.log(user.steamID.toString())
 )),
