@@ -2,7 +2,7 @@ require('dotenv/config'),
 {
   ACCOUNT_NAME,
   PASSWORD,
-  GAMES_IDS
+  GAMES_ID
 } = process.env,
 express = require('express'),
 app = express(),
@@ -24,11 +24,11 @@ user.logOn({
 }),
 user.on('loginKey', (key) =>
   writeFile('key', key, 'utf8')
-    .then(() => print(`Got key "${key}"`))
+    .then(() => console.log(`Got key "${key}"`))
 ),
 user.on('loggedOn', () => (
   user.setPersona(SteamUser.EPersonaState.Online),
-  user.gamesPlayed(GAMES_IDS.split(',').map((gameID) => +gameID)),
+  user.gamesPlayed(GAMES_ID.split(',').map((gameID) => +gameID)),
   console.log(user.steamID.toString())
 )),
 user.on('error', console.error)
