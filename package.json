@@ -1,0 +1,11 @@
+{
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1",
+    "steam-user": "^4.19.12"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
