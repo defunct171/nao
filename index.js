@@ -2,28 +2,21 @@ require('dotenv/config'),
 {
   ACCOUNT_NAME,
   PASSWORD,
+  SHARED_SECRET,
   GAMES_ID
 } = process.env,
 express = require('express'),
 app = express(),
 app.get('/', (req, res) => res.sendStatus(200)),
 app.listen(process.env.PORT),
-database = new (require('@replit/database'))(),
 SteamUser = require('steam-user'),
+SteamTotp = require('steam-totp'),
 user = new SteamUser({ dataDirectory: null }),
-(async () => (
-  loginKey = await database.get('key'),
-  user.logOn({
-    accountName: ACCOUNT_NAME,
-    password: PASSWORD,
-    loginKey,
-    rememberPassword: true
-  })
-))(),
-user.on('loginKey', (key) =>
-  database.set('key', key)
-    .then(() => console.log(`Got key "${key}"`))
-),
+user.logOn({
+  accountName: ACCOUNT_NAME,
+  password: PASSWORD,
+  twoFactorCode: SteamTotp.getAuthCode(SHARED_SECRET),
+}),
 user.on('loggedOn', () => (
   user.setPersona(SteamUser.EPersonaState.Online),
   user.gamesPlayed(GAMES_ID.split(',').map((gameID) => +gameID)),

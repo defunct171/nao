@@ -77,13 +77,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@replit/database@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@replit/database/-/database-2.0.1.tgz#91ed80c7bc1486aa69c9449d377b295512e80e6a"
-  integrity sha512-SeW/qkk4FEteZ75B2S/MIQJ/bYdOO0f2+tdsikwO5k9TyYI3q7YANTpUJ7W79xarSd5gJ9NFk5Y55Pov2z1dwA==
-  dependencies:
-    node-fetch "^2.6.0"
-
 "@types/long@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"
@@ -582,11 +575,6 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-node-fetch@^2.6.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
-
 object-inspect@^1.11.0, object-inspect@^1.9.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.11.0.tgz#9dceb146cedd4148a0d9e51ab88d34cf509922b1"
@@ -752,7 +740,7 @@ steam-appticket@^1.0.1:
     protobufjs "^6.8.8"
     steamid "^1.1.0"
 
-steam-totp@^2.0.1:
+steam-totp@^2.0.1, steam-totp@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/steam-totp/-/steam-totp-2.1.1.tgz#c02c2696a062e676475d79712661e9f576ace4de"
   integrity sha512-d+tjnr3wwDkbrKFxjYZ0uK4CSF09oJwCmlGH8SdOlTDkbtBPuNhPKY0XzZxQVltZF6/JkEYj+uz+kBr6UrY7BQ==
