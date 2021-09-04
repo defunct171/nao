@@ -19,7 +19,7 @@ user.logOn({
   twoFactorCode: SteamTotp.getAuthCode(SHARED_SECRET),
 }),
 user.on('loggedOn', () => (
-  user.setPersona(SteamUser.EPersonaState.Online),
+  user.setPersona(SteamUser.EPersonaState.Snooze),
   user.gamesPlayed(GAMES_ID.split(',').map((gameID) => +gameID)),
   console.log(user.steamID.toString())
 )),
