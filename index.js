@@ -2,7 +2,7 @@ require('dotenv/config'),
 {
   ACCOUNT_NAME,
   PASSWORD,
-  SHARED_SECRET,
+  AUTH_CODE,
   GAMES_ID
 } = process.env,
 express = require('express'),
@@ -16,7 +16,7 @@ user = new SteamUser({ dataDirectory: null }),
 user.logOn({
   accountName: ACCOUNT_NAME,
   password: PASSWORD,
-  twoFactorCode: SteamTotp.getAuthCode(SHARED_SECRET),
+  authCode: AUTH_CODE,
 }),
 user.on('loggedOn', () => (
   user.setPersona(SteamUser.EPersonaState.Snooze),
