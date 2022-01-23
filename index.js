@@ -13,10 +13,14 @@ SteamUser = require('steam-user'),
 SteamTotp = require('steam-totp'),
 playStateBlocked = false,
 user = new SteamUser({ dataDirectory: null }),
+{ promises: { writeFile } } = require('fs'),
+sentry = require('./sentry.json'),
+BJSON = require('buffer-json'),
+sentryParsed = BJSON.parse(BJSON.stringify(sentry)),
+(sentryParsed && user.setSentry(sentryParsed)),
 user.logOn({
   accountName: ACCOUNT_NAME,
   password: PASSWORD,
-  authCode: AUTH_CODE,
 }),
 user.on('loggedOn', () => (
   user.setPersona(SteamUser.EPersonaState.Snooze),
@@ -25,7 +29,10 @@ user.on('loggedOn', () => (
 )),
 user.on('playingState', (blocked) =>
   playStateBlocked !== blocked && (playStateBlocked = blocked)
-)
+),
+user.on('sentry', async (sentry) =>
+  await writeFile('./sentry.json', BJSON.stringify(sentry))
+),
 user.on('error', (err) => (
   (err.eresult === SteamUser.EResult.LoggedInElsewhere &&
   (playStateBlocked = true, setTimeout(() => user.logOn(true), 60 * 5 * 1e3))),
